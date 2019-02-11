@@ -46,6 +46,9 @@ client.on('message', (msg) => {
     const r = new RegExp(`${prefix}${command.compiled}`);
     const match = message.match(r) ? message.match(r) : [];
     const plugin = loader.getPlugin(match[1]);
+    if(plugin === undefined){
+      return null; 
+    }
     if (plugin.state && (`${prefix}${command.compiled}` === message || match[1])) {
       return command.response(msg, match);
     }
